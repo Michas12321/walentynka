@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walentynka</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6; /* Jasnoróżowe tło */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Żeby przycisk nie rozepchał strony */
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        h1 {
+            color: #ff4d4d;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #28a745; /* Zielony */
+            color: white;
+            font-weight: bold;
+        }
+
+        #noBtn {
+            background-color: #dc3545; /* Czerwony */
+            color: white;
+        }
+
+        /* Ukryty ekran końcowy */
+        #successScreen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #successScreen img {
+            max-width: 300px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        .gif-container img {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="questionScreen">
+        <div class="gif-container">
+            <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Cute bear">
+        </div>
+        <h1>Zostaniesz moją Walentynką? 💖</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="sheSaidYes()">TAK</button>
+            <button id="noBtn" onclick="growYesButton()">Nie</button>
+        </div>
+    </div>
+
+    <div id="successScreen">
+        <h1>Jej! Wiedziałem! Kocham Cię! ❤️</h1>
+        <img src="https://media.tenor.com/b7N5yWj9Zf4AAAAi/mocha-bear-hearts.gif" alt="Happy bear">
+    </div>
+
+    <script>
+        let fontSize = 1.2; // Początkowa wielkość czcionki w 'rem'
+        let padding = 15;   // Początkowy padding
+        
+        // Teksty na przycisku NIE, które zmieniają się przy klikaniu
+        const noTexts = [
+            "Nie", 
+            "Jesteś pewna?", 
+            "Na pewno?", 
+            "Proszę pomyśl!", 
+            "Złamię Ci serce!", 
+            "Będę płakał...", 
+            "Daj spokój!",
+            "Ostatnia szansa!",
+            "Ok, przestaję pytać...",
+            "Żartowałem, PROSZĘ!"
+        ];
+        let clickCount = 0;
+
+        function growYesButton() {
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+
+            // Zwiększanie przycisku TAK
+            fontSize += 0.5; // Zwiększ czcionkę
+            padding += 5;    // Zwiększ przycisk
+            
+            yesBtn.style.fontSize = fontSize + 'rem';
+            yesBtn.style.padding = padding + 'px ' + (padding * 2) + 'px';
+
+            // Zmiana tekstu na przycisku NIE (opcjonalne, dla zabawy)
+            clickCount++;
+            if (clickCount < noTexts.length) {
+                noBtn.innerText = noTexts[clickCount];
+            }
+        }
+
+        function sheSaidYes() {
+            document.getElementById('questionScreen').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'flex';
+            
+            // Opcjonalnie: Dodanie konfetti (wymagałoby zewnętrznej biblioteki, ale to wersja prosta)
+        }
+    </script>
+</body>
+</html>
