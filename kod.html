@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twój Kod Walentynkowy</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #ff4d4d;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .reveal-btn {
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .reveal-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Styl ukrytego kodu */
+        #secretCode {
+            display: none; /* To sprawia, że na początku jest niewidoczny */
+            margin-top: 30px;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #28a745;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 3px dashed #28a745;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mam dla Ciebie specjalny kod... ❤️</h1>
+
+    <button class="reveal-btn" onclick="revealCode()">Kliknij, by ujawnić kod</button>
+
+    <div id="secretCode">KOCHAM-CIĘ-BARDZO</div>
+
+    <script>
+        function revealCode() {
+            const codeDiv = document.getElementById('secretCode');
+            const btn = document.querySelector('.reveal-btn');
+            
+            // Pokaż kod
+            codeDiv.style.display = 'block';
+            
+            // Zmień tekst przycisku
+            btn.innerText = "Oto Twój kod!";
+            btn.style.backgroundColor = "#ccc"; // Szary kolor po kliknięciu
+            btn.disabled = true; // Zablokuj przycisk
+        }
+    </script>
+
+</body>
+</html>
