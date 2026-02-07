@@ -7,24 +7,26 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #ffe6e6; 
+            background-color: #ffe6e6; /* Jasnoróżowe tło */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Zmienione na min-height dla lepszego skalowania */
             margin: 0;
-            overflow: hidden; 
+            overflow-x: hidden; /* Tylko poziome ukrywanie */
             text-align: center;
         }
 
         .container {
             position: relative;
+            padding: 20px;
         }
 
         h1 {
             color: #ff4d4d;
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(255, 77, 77, 0.2);
         }
 
         .buttons {
@@ -42,45 +44,76 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         #yesBtn {
-            background-color: #28a745; /* Zielony */
+            background-color: #28a745;
             color: white;
             font-weight: bold;
         }
 
         #noBtn {
-            background-color: #dc3545; 
+            background-color: #dc3545;
             color: white;
         }
 
-        /* Ekran sukcesu */
+        /* --- STYL EKRANU KOŃCOWEGO --- */
         #successScreen {
             display: none;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
-        #successScreen img {
-            max-width: 300px;
-            border-radius: 15px;
-            margin-top: 20px;
-        }
-        
-        .gif-container img {
-            max-width: 200px;
-            margin-bottom: 20px;
+        /* Kontener na zdjęcia */
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap; /* Żeby na telefonie spadały pod spód */
         }
 
-        /* Styl dla nowego przycisku "Odbierz kod" */
+        /* Styl pojedynczego zdjęcia */
+        .photo-gallery img {
+            width: 150px;       /* Szerokość zdjęcia */
+            height: 200px;      /* Wysokość zdjęcia */
+            object-fit: cover;  /* Żeby nie rozciągało twarzy */
+            border: 6px solid white; /* Biała ramka jak w polaroidzie */
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Cień */
+            transition: transform 0.3s ease;
+        }
+
+        /* Efekt przechylenia zdjęć dla ładnego wyglądu */
+        .photo-gallery img:nth-child(1) {
+            transform: rotate(-6deg); /* Pierwsze w lewo */
+        }
+        .photo-gallery img:nth-child(2) {
+            transform: rotate(3deg) scale(1.1); /* Środkowe większe */
+            z-index: 10;
+        }
+        .photo-gallery img:nth-child(3) {
+            transform: rotate(8deg); /* Trzecie w prawo */
+        }
+
+        /* Po najechaniu myszką zdjęcie się prostuje */
+        .photo-gallery img:hover {
+            transform: scale(1.2) rotate(0deg);
+            z-index: 20;
+        }
+
+        /* Przycisk przejścia do kodu */
         .next-page-btn {
-            margin-top: 30px;
+            margin-top: 20px;
             padding: 15px 40px;
             background-color: #ff4d4d;
             color: white;
-            font-size: 1.5rem;
-            text-decoration: none; /* Usuwa podkreślenie linku */
+            font-size: 1.2rem;
+            text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
             box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
@@ -91,6 +124,11 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
+        }
+
+        .gif-container img {
+            max-width: 180px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -108,9 +146,12 @@
     </div>
 
     <div id="successScreen">
-        <h1>Jej! Cieszę się! ❤️</h1>
-        <img src="https://media.tenor.com/b7N5yWj9Zf4AAAAi/mocha-bear-hearts.gif" alt="Happy bear">
-        
+        <h1>Mega okej, lovki &lt;3</h1> <div class="photo-gallery">
+            <img src="foto1.jpg" alt="Nasze zdjęcie 1">
+            <img src="foto2.jpg" alt="Nasze zdjęcie 2">
+            <img src="foto3.jpg" alt="Nasze zdjęcie 3">
+        </div>
+
         <a href="kod.html" class="next-page-btn">Odbierz niespodziankę 🎁</a>
     </div>
 
