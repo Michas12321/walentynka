@@ -7,19 +7,23 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #ffe6e6; /* Jasnoróżowe tło */
+            background-color: #ffe6e6;
+            /* Delikatny wzorek w tle (opcjonalnie) */
+            background-image: radial-gradient(#ffcccc 1px, transparent 1px);
+            background-size: 20px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Zmienione na min-height dla lepszego skalowania */
+            min-height: 100vh;
             margin: 0;
-            overflow-x: hidden; /* Tylko poziome ukrywanie */
+            overflow: hidden; /* Ważne, żeby zdjęcia tła nie wystawały */
             text-align: center;
         }
 
         .container {
             position: relative;
             padding: 20px;
+            z-index: 10; /* Główne elementy na wierzchu */
         }
 
         h1 {
@@ -60,55 +64,69 @@
 
         /* --- STYL EKRANU KOŃCOWEGO --- */
         #successScreen {
-            display: none;
+            display: none; /* Na początku ukryty */
+            position: relative;
+            width: 100%;
+            height: 100vh;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
         }
 
-        /* Kontener na zdjęcia */
-        .photo-gallery {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin: 30px 0;
-            flex-wrap: wrap; /* Żeby na telefonie spadały pod spód */
+        /* Kontener na treść (tekst i przycisk), żeby był na wierzchu */
+        .content-box {
+            position: relative;
+            z-index: 20; /* Najwyższy priorytet wyświetlania */
+            background-color: rgba(255, 255, 255, 0.85); /* Półprzezroczyste tło pod tekstem dla czytelności */
+            padding: 30px 50px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(255, 77, 77, 0.2);
+            backdrop-filter: blur(5px); /* Rozmycie tła pod tekstem (fajny efekt) */
         }
 
-        /* Styl pojedynczego zdjęcia */
-        .photo-gallery img {
-            width: 150px;       /* Szerokość zdjęcia */
-            height: 200px;      /* Wysokość zdjęcia */
-            object-fit: cover;  /* Żeby nie rozciągało twarzy */
-            border: 6px solid white; /* Biała ramka jak w polaroidzie */
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Cień */
-            transition: transform 0.3s ease;
+        /* --- STYL ZDJĘĆ W TLE --- */
+        .bg-photo {
+            position: absolute; /* Pozycjonowanie absolutne - "przyklejamy" je do ekranu */
+            width: 150px; /* Rozmiar zdjęć */
+            height: auto;
+            border-radius: 15px;
+            opacity: 0.7; /* Półprzezroczystość - żeby były tłem */
+            z-index: 1; /* Pod spodem treści */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* Efekt przechylenia zdjęć dla ładnego wyglądu */
-        .photo-gallery img:nth-child(1) {
-            transform: rotate(-6deg); /* Pierwsze w lewo */
-        }
-        .photo-gallery img:nth-child(2) {
-            transform: rotate(3deg) scale(1.1); /* Środkowe większe */
-            z-index: 10;
-        }
-        .photo-gallery img:nth-child(3) {
-            transform: rotate(8deg); /* Trzecie w prawo */
+        /* Ustawienie konkretnych zdjęć */
+        .walentynka 1.jfif {
+            top: 10%;
+            left: 5%;
+            transform: rotate(-15deg);
         }
 
-        /* Po najechaniu myszką zdjęcie się prostuje */
-        .photo-gallery img:hover {
-            transform: scale(1.2) rotate(0deg);
-            z-index: 20;
+        .walentynka 2.jfif {
+            bottom: 15%;
+            right: 5%;
+            transform: rotate(10deg);
         }
+
+        .walentynka 3.jfif {
+            top: 15%;
+            right: 8%;
+            transform: rotate(5deg);
+        }
+        
+        /* Na telefonach trochę zmieniamy pozycje, żeby nie zasłaniały środka */
+        @media (max-width: 600px) {
+             .bg-photo { width: 100px; opacity: 0.5; }
+             .foto-1 { top: 5%; left: -2%; }
+             .foto-2 { bottom: 5%; right: -2%; }
+             .foto-3 { bottom: 5%; left: 5%; top: auto; transform: rotate(-5deg); }
+        }
+
 
         /* Przycisk przejścia do kodu */
         .next-page-btn {
-            margin-top: 20px;
+            display: inline-block;
+            margin-top: 30px;
             padding: 15px 40px;
             background-color: #ff4d4d;
             color: white;
@@ -146,13 +164,15 @@
     </div>
 
     <div id="successScreen">
-        <h1>Mega okej, lovki &lt;3</h1> <div class="photo-gallery">
-            <img src="foto1.jpg" alt="Nasze zdjęcie 1">
-            <img src="foto2.jpg" alt="Nasze zdjęcie 2">
-            <img src="foto3.jpg" alt="Nasze zdjęcie 3">
-        </div>
+        
+        <img src="foto1.jpg" class="bg-photo foto-1" alt="Tło 1">
+        <img src="foto2.jpg" class="bg-photo foto-2" alt="Tło 2">
+        <img src="foto3.jpg" class="bg-photo foto-3" alt="Tło 3">
 
-        <a href="kod.html" class="next-page-btn">Odbierz niespodziankę 🎁</a>
+        <div class="content-box">
+            <h1>Mega okej, lovki &lt;3</h1>
+            <a href="kod.html" class="next-page-btn">Odbierz niespodziankę 🎁</a>
+        </div>
     </div>
 
     <script>
@@ -188,11 +208,3 @@
                 noBtn.innerText = noTexts[clickCount];
             }
         }
-
-        function sheSaidYes() {
-            document.getElementById('questionScreen').style.display = 'none';
-            document.getElementById('successScreen').style.display = 'flex';
-        }
-    </script>
-</body>
-</html>
