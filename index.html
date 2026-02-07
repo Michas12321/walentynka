@@ -61,7 +61,6 @@
             color: white;
         }
 
-        /* --- EKRAN KOŃCOWY --- */
         #successScreen {
             display: none;
             position: relative;
@@ -82,7 +81,6 @@
             backdrop-filter: blur(5px);
         }
 
-        /* --- ZDJĘCIA W TLE --- */
         .bg-photo {
             position: absolute;
             width: 150px;
@@ -93,7 +91,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* Ustawienie pozycji zdjęć */
+        /* USTAWIENIA ZDJĘĆ */
         .foto-1 {
             top: 10%;
             left: 5%;
@@ -111,18 +109,22 @@
             right: 8%;
             transform: rotate(5deg);
         }
+
+        /* NOWE ZDJĘCIE - LEWY DOLNY RÓG */
+        .foto-4 {
+            bottom: 10%;
+            left: 5%;
+            transform: rotate(-12deg);
+        }
         
         @media (max-width: 600px) {
              .bg-photo { width: 100px; opacity: 0.5; }
              .foto-1 { top: 5%; left: -2%; }
              .foto-2 { bottom: 5%; right: -2%; }
-             .foto-3 { bottom: 5%; left: 5%; top: auto; transform: rotate(-5deg);
-                      .foto-4 {
-            bottom: 10%;  /* Na dole */
-            left: 5%;     /* Z lewej */
-            transform: rotate(-12deg); /* Lekko obrócone */
+             .foto-3 { bottom: 5%; left: 5%; top: auto; transform: rotate(-5deg); }
+             /* Na telefonie ustawiamy 4 zdjęcie też ładnie */
+             .foto-4 { bottom: 20%; left: -5%; transform: rotate(15deg); }
         }
-         
 
         .next-page-btn {
             display: inline-block;
@@ -170,7 +172,6 @@
         <img src="walentynka3.jfif" class="bg-photo foto-3" alt="Tło 3">
         <img src="walentynka4.jfif" class="bg-photo foto-4" alt="Tło 4">
 
-
         <div class="content-box">
             <h1>Mega okej, lovki &lt;3</h1>
             <a href="kod.html" class="next-page-btn">Odbierz niespodziankę 🎁</a>
@@ -183,14 +184,13 @@
         
         const noTexts = [
             "Nie", 
-            "Jesteś pewna?", 
-            "Na pewno?", 
-            "Proszę pomyśl!",  
-            "Będę płakał...", 
-            "Daj spokój!",
-            "Ostatnia szansa!",
-            "Ok, przestaję pytać...",
-            "Żartowałem, PROSZĘ!"
+            "mhm", 
+            "ok", 
+            "Ziomuś...",  
+            "Ja ci dam NIE", 
+            "mhm",
+            "spoko",
+            
         ];
         let clickCount = 0;
 
@@ -217,4 +217,3 @@
     </script>
 </body>
 </html>
-
