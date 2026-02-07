@@ -7,13 +7,13 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #ffe6e6; /* Jasnoróżowe tło */
+            background-color: #ffe6e6; 
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Żeby przycisk nie rozepchał strony */
+            overflow: hidden; 
             text-align: center;
         }
 
@@ -51,11 +51,11 @@
         }
 
         #noBtn {
-            background-color: #dc3545; /* Czerwony */
+            background-color: #dc3545; 
             color: white;
         }
 
-        /* Ukryty ekran końcowy */
+        /* Ekran sukcesu */
         #successScreen {
             display: none;
             flex-direction: column;
@@ -71,6 +71,26 @@
         .gif-container img {
             max-width: 200px;
             margin-bottom: 20px;
+        }
+
+        /* Styl dla nowego przycisku "Odbierz kod" */
+        .next-page-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background-color: #ff4d4d;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none; /* Usuwa podkreślenie linku */
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -88,15 +108,16 @@
     </div>
 
     <div id="successScreen">
-        <h1>Jej! Wiedziałem! Kocham Cię! ❤️</h1>
+        <h1>Jej! Cieszę się! ❤️</h1>
         <img src="https://media.tenor.com/b7N5yWj9Zf4AAAAi/mocha-bear-hearts.gif" alt="Happy bear">
+        
+        <a href="kod.html" class="next-page-btn">Odbierz niespodziankę 🎁</a>
     </div>
 
     <script>
-        let fontSize = 1.2; // Początkowa wielkość czcionki w 'rem'
-        let padding = 15;   // Początkowy padding
+        let fontSize = 1.2; 
+        let padding = 15;   
         
-        // Teksty na przycisku NIE, które zmieniają się przy klikaniu
         const noTexts = [
             "Nie", 
             "Jesteś pewna?", 
@@ -115,14 +136,12 @@
             const yesBtn = document.getElementById('yesBtn');
             const noBtn = document.getElementById('noBtn');
 
-            // Zwiększanie przycisku TAK
-            fontSize += 0.5; // Zwiększ czcionkę
-            padding += 5;    // Zwiększ przycisk
+            fontSize += 0.5; 
+            padding += 5;    
             
             yesBtn.style.fontSize = fontSize + 'rem';
             yesBtn.style.padding = padding + 'px ' + (padding * 2) + 'px';
 
-            // Zmiana tekstu na przycisku NIE (opcjonalne, dla zabawy)
             clickCount++;
             if (clickCount < noTexts.length) {
                 noBtn.innerText = noTexts[clickCount];
@@ -132,8 +151,6 @@
         function sheSaidYes() {
             document.getElementById('questionScreen').style.display = 'none';
             document.getElementById('successScreen').style.display = 'flex';
-            
-            // Opcjonalnie: Dodanie konfetti (wymagałoby zewnętrznej biblioteki, ale to wersja prosta)
         }
     </script>
 </body>
