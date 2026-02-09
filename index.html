@@ -108,18 +108,28 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* Ustawienia zdjęć w tle */
+        /* Ustawienia zdjęć w tle (DLA KOMPUTERA) */
         .foto-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
         .foto-2 { bottom: 15%; right: 5%; transform: rotate(10deg); }
         .foto-3 { top: 15%; right: 8%; transform: rotate(5deg); }
         .foto-4 { bottom: 10%; left: 5%; transform: rotate(-12deg); }
         
+        /* POPRAWIONE USTAWIENIA DLA TELEFONU */
         @media (max-width: 600px) {
              .bg-photo { width: 100px; opacity: 0.5; }
-             .foto-1 { top: 5%; left: -2%; }
-             .foto-2 { bottom: 5%; right: -2%; }
-             .foto-3 { bottom: 5%; left: 5%; top: auto; transform: rotate(-5deg); }
-             .foto-4 { bottom: 20%; left: -5%; transform: rotate(15deg); }
+             
+             /* Lewy Górny */
+             .foto-1 { top: 2%; left: -5%; transform: rotate(-15deg); }
+             
+             /* Prawy Górny (Przeniosłem tu zdjęcie 3) */
+             .foto-3 { top: 5%; right: -5%; left: auto; transform: rotate(10deg); }
+             
+             /* Lewy Dolny */
+             .foto-2 { bottom: 5%; left: -5%; right: auto; top: auto; transform: rotate(-5deg); }
+             
+             /* Prawy Dolny (Przeniosłem tu zdjęcie 4) */
+             .foto-4 { bottom: 15%; right: -5%; left: auto; transform: rotate(15deg); }
+             
              h1 { font-size: 1.8rem; }
              .main-img { max-width: 80%; }
         }
@@ -231,6 +241,13 @@
             "Ja ci dam NIE", 
             "mhm",
             "spoko",
+            "Nie", 
+            "mhm", 
+            "ok", 
+            "Ziomuś...",  
+            "Ja ci dam NIE", 
+            "mhm",
+            "spoko"
         ];
         let clickCount = 0;
 
@@ -257,7 +274,3 @@
     </script>
 </body>
 </html>
-
-
-
-
