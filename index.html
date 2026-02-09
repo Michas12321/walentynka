@@ -19,18 +19,19 @@
             text-align: center;
         }
 
-        /* Klasa używana do wszystkich głównych ekranów */
-        .screen-container {
+        .container {
             position: relative;
             padding: 20px;
             z-index: 10;
-            display: none; /* Domyślnie wszystkie ukryte */
+            display: none; /* Domyślnie ukrywamy wszystko, JS pokaże co trzeba */
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            width: 100%;
         }
 
-        /* Pierwszy ekran ma być widoczny od razu */
-        #screen1 {
+        /* Pokazujemy pierwszy ekran (Intro) na start */
+        #introScreen {
             display: flex;
         }
 
@@ -39,13 +40,7 @@
             font-size: 2.5rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 5px rgba(255, 77, 77, 0.2);
-        }
-        
-        p {
-            font-size: 1.5rem;
-            color: #444;
-            max-width: 600px;
-            margin-bottom: 30px;
+            max-width: 90%;
         }
 
         .buttons {
@@ -54,6 +49,7 @@
             align-items: center;
             gap: 20px;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         button {
@@ -66,19 +62,22 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
+        /* Style przycisków */
         .btn-green { background-color: #28a745; color: white; font-weight: bold; }
         .btn-red { background-color: #dc3545; color: white; }
-        .btn-main { background-color: #ff4d4d; color: white; font-weight: bold; }
+        .btn-neutral { background-color: #ff4d4d; color: white; font-weight: bold; }
 
-        /* Styl dla zdjęć/gifów na środku */
+        /* Style zdjęć głównych (nie tła) */
         .main-img {
-            max-width: 250px;
-            border-radius: 15px;
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            object-fit: cover;
         }
 
-        /* --- STYL EKRANU KOŃCOWEGO (ZDJĘCIA W TLE) --- */
+        /* --- EKRAN KOŃCOWY (TŁO) --- */
         #successScreen {
             display: none;
             position: relative;
@@ -109,6 +108,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
+        /* Ustawienia zdjęć w tle */
         .foto-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
         .foto-2 { bottom: 15%; right: 5%; transform: rotate(10deg); }
         .foto-3 { top: 15%; right: 8%; transform: rotate(5deg); }
@@ -120,6 +120,8 @@
              .foto-2 { bottom: 5%; right: -2%; }
              .foto-3 { bottom: 5%; left: 5%; top: auto; transform: rotate(-5deg); }
              .foto-4 { bottom: 20%; left: -5%; transform: rotate(15deg); }
+             h1 { font-size: 1.8rem; }
+             .main-img { max-width: 80%; }
         }
 
         .next-page-btn {
@@ -145,42 +147,34 @@
 </head>
 <body>
 
-    <div class="screen-container" id="screen1">
-        <img src="twoje_zdjecie1.jpg" class="main-img" alt="Zdjęcie wstępne">
-        
-        <h1>TU WPISZ TWÓJ TYTUŁ WSTĘPNY</h1>
-        <p>Tu wpisz jakiś dłuższy tekst, który chcesz jej przekazać na samym początku.</p>
-        
-        <button class="btn-main" onclick="goToScreen('screen2')">Kliknij, żeby przejść dalej</button>
+    <div class="container" id="introScreen">
+        <h1>Hej, mam coś dla Ciebie...</h1>
+        <img src="wstep.jpg" class="main-img" alt="Wstęp">
+        <button class="btn-neutral" onclick="goTeaser()">Dalej</button>
     </div>
 
-    <div class="screen-container" id="screen2">
-        <img src="twoje_zdjecie2.jpg" class="main-img" alt="Zdjęcie 2">
-        
-        <h1>TU WPISZ PYTANIE</h1>
-        <p>Czy jesteś gotowa ujrzeć to najważniejsze pytanie?</p>
-        
+    <div class="container" id="teaserScreen">
+        <h1>Chcesz zobaczyć co to za pytanie? 😏</h1>
+        <img src="teaser.jpg" class="main-img" alt="Teaser">
         <div class="buttons">
-            <button class="btn-green" onclick="goToScreen('questionScreen')">TAK</button>
-            <button class="btn-red" onclick="goToScreen('screenJoke')">NIE</button>
+            <button class="btn-green" onclick="goQuestion()">TAK</button>
+            <button class="btn-red" onclick="goJoking()">NIE</button>
         </div>
     </div>
 
-    <div class="screen-container" id="screenJoke">
-        <img src="https://media.tenor.com/FwF_vz2z_cEAAAAi/cat-angry.gif" class="main-img" alt="Zły kot">
-        
-        <h1>No chyba sobie żartujesz...</h1>
-        <p>Nie ma opcji "Nie"! Spróbujmy jeszcze raz.</p>
-        
+    <div class="container" id="jokingScreen">
+        <h1>Chyba sobie żartujesz... 🤨</h1>
+        <p>Nie ma takiej opcji!</p>
         <div class="buttons">
-            <button class="btn-green" onclick="goToScreen('questionScreen')">Okej, TAK</button>
-            <button class="btn-green" onclick="goToScreen('questionScreen')">Oczywiście, że TAK</button>
+            <button class="btn-green" onclick="goQuestion()">No dobra, TAK</button>
+            <button class="btn-green" onclick="goQuestion()">Oczywiście, że TAK</button>
         </div>
     </div>
 
-    <div class="screen-container" id="questionScreen">
-        <img src="swoj_gif.gif" class="main-img" alt="Twój GIF Walentynkowy">
-        
+    <div class="container" id="questionScreen">
+        <div class="gif-container">
+            <img src="moj_gif.gif" class="main-img" alt="Gif walentynkowy">
+        </div>
         <h1>Zostaniesz moją Walentynką? 💖</h1>
         <div class="buttons">
             <button id="yesBtn" class="btn-green" onclick="sheSaidYes()">TAK</button>
@@ -189,6 +183,7 @@
     </div>
 
     <div id="successScreen">
+        
         <img src="walentynka1.jfif" class="bg-photo foto-1" alt="Tło 1">
         <img src="walentynka2.jfif" class="bg-photo foto-2" alt="Tło 2">
         <img src="walentynka3.jfif" class="bg-photo foto-3" alt="Tło 3">
@@ -201,20 +196,24 @@
     </div>
 
     <script>
-        // --- Funkcja do zmieniania ekranów ---
-        function goToScreen(screenId) {
-            // Ukryj wszystkie ekrany z klasą .screen-container
-            const screens = document.querySelectorAll('.screen-container');
-            screens.forEach(screen => screen.style.display = 'none');
-            
-            // Ukryj też ekran sukcesu na wszelki wypadek
-            document.getElementById('successScreen').style.display = 'none';
-
-            // Pokaż tylko ten wybrany
-            document.getElementById(screenId).style.display = 'flex';
+        // Funkcje do przechodzenia między ekranami
+        function goTeaser() {
+            document.getElementById('introScreen').style.display = 'none';
+            document.getElementById('teaserScreen').style.display = 'flex';
         }
 
-        // --- Logika Walentynki (powiększający się przycisk) ---
+        function goQuestion() {
+            document.getElementById('teaserScreen').style.display = 'none';
+            document.getElementById('jokingScreen').style.display = 'none';
+            document.getElementById('questionScreen').style.display = 'flex';
+        }
+
+        function goJoking() {
+            document.getElementById('teaserScreen').style.display = 'none';
+            document.getElementById('jokingScreen').style.display = 'flex';
+        }
+
+        // Logika przycisku walentynkowego
         let fontSize = 1.2; 
         let padding = 15;   
         
@@ -225,7 +224,7 @@
             "Ziomuś...",  
             "Ja ci dam NIE", 
             "mhm",
-            "spoko"
+            "spoko",
         ];
         let clickCount = 0;
 
@@ -246,7 +245,6 @@
         }
 
         function sheSaidYes() {
-            // Ukrywa pytanie i pokazuje ekran sukcesu
             document.getElementById('questionScreen').style.display = 'none';
             document.getElementById('successScreen').style.display = 'flex';
         }
