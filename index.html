@@ -23,16 +23,15 @@
             position: relative;
             padding: 20px;
             z-index: 10;
-            display: none; /* Domyślnie ukrywamy wszystko, JS pokaże co trzeba */
+            display: none; /* Domyślnie ukryte */
             flex-direction: column;
             align-items: center;
             justify-content: center;
             width: 100%;
         }
 
-        /* Pokazujemy pierwszy ekran (Intro) na start */
         #introScreen {
-            display: flex;
+            display: flex; /* Tylko to widoczne na start */
         }
 
         h1 {
@@ -62,12 +61,10 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        /* Style przycisków */
         .btn-green { background-color: #28a745; color: white; font-weight: bold; }
         .btn-red { background-color: #dc3545; color: white; }
         .btn-neutral { background-color: #ff4d4d; color: white; font-weight: bold; }
 
-        /* Style zdjęć głównych (nie tła) */
         .main-img {
             max-width: 300px;
             max-height: 300px;
@@ -77,7 +74,6 @@
             object-fit: cover;
         }
 
-        /* --- EKRAN KOŃCOWY (TŁO) --- */
         #successScreen {
             display: none;
             position: relative;
@@ -108,27 +104,47 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* Ustawienia zdjęć w tle (DLA KOMPUTERA) */
+        /* USTAWIENIA DLA KOMPUTERA (Domyślne) */
         .foto-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
         .foto-2 { bottom: 15%; right: 5%; transform: rotate(10deg); }
         .foto-3 { top: 15%; right: 8%; transform: rotate(5deg); }
         .foto-4 { bottom: 10%; left: 5%; transform: rotate(-12deg); }
         
-        /* POPRAWIONE USTAWIENIA DLA TELEFONU */
+        /* --- USTAWIENIA DLA TELEFONU (BARDZO WAŻNE) --- */
         @media (max-width: 600px) {
              .bg-photo { width: 100px; opacity: 0.5; }
              
-             /* Lewy Górny */
-             .foto-1 { top: 2%; left: -5%; transform: rotate(-15deg); }
+             /* 1. LEWY GÓRNY */
+             .foto-1 { 
+                 top: 2%; 
+                 left: -5%; 
+                 right: auto; bottom: auto; /* Resetujemy inne pozycje */
+                 transform: rotate(-15deg); 
+             }
              
-             /* Prawy Górny (Przeniosłem tu zdjęcie 3) */
-             .foto-3 { top: 5%; right: -5%; left: auto; transform: rotate(10deg); }
+             /* 2. PRAWY GÓRNY (Przeniesione tutaj!) */
+             .foto-2 { 
+                 top: 2%; 
+                 right: -5%; 
+                 left: auto; bottom: auto;
+                 transform: rotate(15deg); 
+             }
              
-             /* Lewy Dolny */
-             .foto-2 { bottom: 5%; left: -5%; right: auto; top: auto; transform: rotate(-5deg); }
+             /* 3. LEWY DOLNY */
+             .foto-3 { 
+                 bottom: 5%; 
+                 left: -5%; 
+                 top: auto; right: auto;
+                 transform: rotate(5deg); 
+             }
              
-             /* Prawy Dolny (Przeniosłem tu zdjęcie 4) */
-             .foto-4 { bottom: 15%; right: -5%; left: auto; transform: rotate(15deg); }
+             /* 4. PRAWY DOLNY */
+             .foto-4 { 
+                 bottom: 5%; 
+                 right: -5%; 
+                 top: auto; left: auto;
+                 transform: rotate(-10deg); 
+             }
              
              h1 { font-size: 1.8rem; }
              .main-img { max-width: 80%; }
@@ -241,13 +257,6 @@
             "Ja ci dam NIE", 
             "mhm",
             "spoko",
-            "Nie", 
-            "mhm", 
-            "ok", 
-            "Ziomuś...",  
-            "Ja ci dam NIE", 
-            "mhm",
-            "spoko"
         ];
         let clickCount = 0;
 
